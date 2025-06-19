@@ -8,6 +8,7 @@ url_uniq = invite_url.rstrip('/').split('/')[-1]
 token = input("Введите токен админа (вида Bearer xxx...):")
 
 subprocess.run(["chmod", "+x", "spam_clear.sh"])
+subprocess.run(["mkdir", "report"])
 
 def reset_antispam():
     subprocess.run(["./spam_clear.sh"], check=True)
@@ -51,11 +52,10 @@ def run_jmeter_scripts():
         p = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
         processes.append(p)
 
-    # Если хочешь дождаться окончания всех:
     for p in processes:
         for line in p.stdout:
             decoded = line.decode().strip()
-            if 'Nashorn engine' not in decoded:  # фильтруем спам
+            if 'Nashorn engine' or 'mysql' not in decoded:  # фильтруем спам варнингами
                 print(decoded)
 
 
