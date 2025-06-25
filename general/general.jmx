@@ -62,7 +62,7 @@ try {
         </JSR223Sampler>
         <hashTree/>
       </hashTree>
-      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Регистрация пользователей для сборка кук">
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Регистрация пользователей для сборка кук" enabled="true">
         <intProp name="ThreadGroup.num_threads">10</intProp>
         <intProp name="ThreadGroup.ramp_time">1</intProp>
         <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
@@ -559,7 +559,7 @@ log.info(&quot;Generated x-bm-device-id: &quot; + deviceId);</stringProp>
           </HeaderManager>
           <hashTree/>
         </hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="auth/tryLogin" enabled="true">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="auth/tryLogin">
           <stringProp name="HTTPSampler.domain">${__P(domain)}</stringProp>
           <stringProp name="HTTPSampler.protocol">https</stringProp>
           <stringProp name="HTTPSampler.path">/d1/1/api/v1/auth/tryLogin</stringProp>
@@ -621,38 +621,6 @@ file &lt;&lt; vars.get(&quot;auth_token&quot;) + System.getProperty(&quot;line.s
             <stringProp name="TestPlan.comments">сохранённые токены используем далее в тестах</stringProp>
           </JSR223PostProcessor>
           <hashTree/>
-          <JSR223PostProcessor guiclass="TestBeanGUI" testclass="JSR223PostProcessor" testname="Переменная для логики" enabled="true">
-            <stringProp name="scriptLanguage">groovy</stringProp>
-            <stringProp name="parameters"></stringProp>
-            <stringProp name="filename"></stringProp>
-            <stringProp name="cacheKey">true</stringProp>
-            <stringProp name="script">try {
-    // Получаем значение параметра loops с дефолтным значением 1
-    def loops = props.get(&quot;loops&quot;) ?: &quot;0&quot;
-    def totalLoops = loops.toInteger()
-    
-    // Получаем текущую итерацию
-    def currentIteration = vars.getIteration()
-    
-    log.info(&quot;Current iteration: ${currentIteration}, Total loops: ${totalLoops}&quot;)
-    
-    // Проверяем, что это последняя итерация
-    if (currentIteration == totalLoops) {
-        props.put(&quot;TG1_FULLY_COMPLETED&quot;, &quot;true&quot;)
-        log.info(&quot;Thread Group#1 completed ${totalLoops} iterations. Flag set&quot;)
-    }
-} catch (Exception e) {
-    log.error(&quot;Error in PostProcessor: &quot;, e)
-    props.put(&quot;TG1_ERROR&quot;, e.getMessage())
-}
-
-int count = Integer.parseInt(vars.get(&quot;count&quot;))
-count++
-vars.put(&quot;count&quot;, count.toString())
-
-</stringProp>
-          </JSR223PostProcessor>
-          <hashTree/>
         </hashTree>
       </hashTree>
       <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
@@ -692,7 +660,7 @@ vars.put(&quot;count&quot;, count.toString())
         <stringProp name="filename"></stringProp>
       </ResultCollector>
       <hashTree/>
-      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Создание группы и наполнение сообщениями">
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Создание группы и наполнение сообщениями" enabled="true">
         <intProp name="ThreadGroup.num_threads">5</intProp>
         <intProp name="ThreadGroup.ramp_time">1</intProp>
         <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
